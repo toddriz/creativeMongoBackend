@@ -22,6 +22,7 @@ angular.module('picture', [])
             $scope.getAll();
 
             $scope.create = function (picture) {
+                console.log(picture);
                 return $http.post('/pictures', picture).success(function (data) {
                     $scope.pictures.push(data);
                 });
