@@ -16,7 +16,7 @@ angular.module('comment', [])
                 console.log("In addComment with " + $scope.formContent);
                 $scope.create({
                     title: $scope.formContent,
-                    upvotes: 0,
+                    upvotes
                 });
                 $scope.formContent = '';
             };
@@ -33,7 +33,7 @@ angular.module('comment', [])
             $scope.getAll();
 
             $scope.create = function (comment) {
-                return $http.post('/comments', comment).success(function (data) {
+                return $http.post('/pictures', comment).success(function (data) {
                     $scope.comments.push(data);
                 });
             };
