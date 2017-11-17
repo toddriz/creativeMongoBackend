@@ -37,13 +37,6 @@ router.post('/pictures', function (req, res, next) {
   });
 });
 
-router.put('/pictures/:picture/upvote', function (req, res, next) {
-  req.picture.upvote(function (err, picture) {
-    if (err) { return next(err); }
-    res.json(picture);
-  });
-});
-
 router.delete('/pictures/:picture', function (req, res) {
   console.log("in Delete");
   req.picture.remove();
