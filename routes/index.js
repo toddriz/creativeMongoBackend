@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/pictures', function (req, res, next) {
-  picture.find(function (err, pictures) {
+  Picture.find(function (err, pictures) {
     if (err) { return next(err); }
     res.json(pictures);
   });
