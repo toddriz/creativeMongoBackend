@@ -22,8 +22,8 @@
             <div>
                 {{test}}
             </div>
-            <div ng-repeat="comment in comments | orderBy: '-upvotes'">
-                <span class="glyphicon glyphicon-remove" ng-click="delete(comment)"></span> {{comment.title}}
+            <div ng-repeat="picture in pictures">
+                <span class="glyphicon glyphicon-remove" ng-click="delete(picture)"></span> {{picture.title}}
             </div>
         </div>
     </div>
