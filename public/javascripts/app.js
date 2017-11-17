@@ -5,6 +5,7 @@ angular.module('picture', [])
             $scope.test = 'Hello world!';
 
             $scope.addPicture = function () {
+                console.log('test');
                 if ($scope.formContent === '') { return; }
                 console.log("In addpicture with " + $scope.formContent);
                 $scope.create({
