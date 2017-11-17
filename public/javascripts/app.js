@@ -3,13 +3,14 @@ angular.module('picture', [])
         '$scope', '$http',
         function ($scope, $http) {
             $scope.test = 'Hello world!';
+            $scope.pictures = [];
 
             $scope.addPicture = function () {
                 console.log('test');
                 if ($scope.formContent === '') { return; }
                 console.log("In addpicture with " + $scope.formContent);
                 $scope.create({
-                    title: $scope.formContent
+                    url: $scope.formContent
                 });
                 $scope.formContent = '';
             };

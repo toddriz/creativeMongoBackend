@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Picture = mongoose.model('Picture');
 
 router.param('picture', function (req, res, next, id) {
-  var query = picture.findById(id);
+  var query = Picture.findById(id);
   query.exec(function (err, picture) {
     if (err) { return next(err); }
     if (!picture) { return next(new Error("can't find picture")); }
@@ -30,7 +30,7 @@ router.get('/pictures/:picture', function (req, res) {
 });
 
 router.post('/pictures', function (req, res, next) {
-  console.log('hi');
+  console.log(req.body);
   var picture = new Picture(req.body);
   picture.save(function (err, picture) {
     if (err) { return next(err); }
