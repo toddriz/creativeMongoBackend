@@ -16,7 +16,7 @@ angular.module('comment', [])
                 console.log("In addComment with " + $scope.formContent);
                 $scope.create({
                     title: $scope.formContent,
-                    upvotes
+                    upvotes: 0,
                 });
                 $scope.formContent = '';
             };
