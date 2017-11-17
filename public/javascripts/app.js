@@ -1,12 +1,12 @@
-angular.module('comment', [])
+angular.module('picture', [])
     .controller('MainCtrl', [
         '$scope', '$http',
         function ($scope, $http) {
             $scope.test = 'Hello world!';
 
-            $scope.addComment = function () {
+            $scope.addpicture = function () {
                 if ($scope.formContent === '') { return; }
-                console.log("In addComment with " + $scope.formContent);
+                console.log("In addpicture with " + $scope.formContent);
                 $scope.create({
                     title: $scope.formContent
                 });
@@ -14,20 +14,20 @@ angular.module('comment', [])
             };
 
             $scope.getAll = function () {
-                return $http.get('/comments').success(function (data) {
-                    angular.copy(data, $scope.comments);
+                return $http.get('/pictures').success(function (data) {
+                    angular.copy(data, $scope.pictures);
                 });
             };
             $scope.getAll();
 
-            $scope.create = function (comment) {
-                return $http.post('/pictures', comment).success(function (data) {
-                    $scope.comments.push(data);
+            $scope.create = function (picture) {
+                return $http.post('/pictures', picture).success(function (data) {
+                    $scope.pictures.push(data);
                 });
             };
 
-            $scope.delete = function (comment) {
-                $http.delete('/comments/' + comment._id)
+            $scope.delete = function (picture) {
+                $http.delete('/pictures/' + picture._id)
                     .success(function (data) {
                         console.log("delete worked");
                     });
