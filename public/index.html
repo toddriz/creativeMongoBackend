@@ -1,33 +1,62 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
     <title>Pictures</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/7007ac89a6.js"></script>
     <link href="./stylesheets/style.css" rel="stylesheet">
-    
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="javascripts/app.js"></script>
+  </head>
 
+  <body ng-app="picture" ng-controller="MainCtrl">
 
-</head>
-
-<body ng-app="picture" ng-controller="MainCtrl">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="page-header">
-                <h1>Pictures </h1>
-            </div>
-
-            <form ng-submit="addPicture()" style="margin-top: 30px">
-                <input placeholder="Image URL" type="text" ng-model="formContent">
-                <button type="submit">Add Picture</button>
-            </form>
-            <div class="picture" ng-repeat="picture in pictures">
-                <div ng-click="delete(picture)" class="picture-delete-button">X</div>
-                <img class="picture-image" src={{picture.url}}>
-            </div>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Mongo Memes</h1>
+          <p class="lead text-muted">Enter the url to your favorite meme below and anyone will be able to see it! (keep it classy, people)</p>
+          <form ng-submit="addPicture()">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Image URL" aria-label="image url" ng-model="formContent">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="submit">Add</button>
+            </span>
+          </div>
+          </form>
         </div>
-    </div>
-</body>
+      </section>
 
+      <div class="album text-muted">
+        <div class="container">
+          <div class="row">
+            <div class="card" ng-repeat="picture in pictures">
+                <div ng-style="{'background-image': 'url(' + picture.url + ')'}" class="image">
+                    <i class="fa fa-trash" aria-hidden="true" ng-click="delete($index)"></i>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
 </html>

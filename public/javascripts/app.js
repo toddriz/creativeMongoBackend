@@ -23,16 +23,15 @@ angular.module('picture', [])
             $scope.getAll();
 
             $scope.create = function (picture) {
-                console.log(picture);
                 return $http.post('/pictures', picture).success(function (data) {
                     $scope.pictures.push(data);
                 });
             };
 
-            $scope.delete = function (picture) {
-                $http.delete('/pictures/' + picture._id)
+            $scope.delete = function (index) {
+                $http.delete('/pictures/' + $scope.pictures[index]._id)
                     .success(function (data) {
-                        console.log("delete worked");
+                        $scope.pictures.splice(index, 1);
                     });
                 $scope.getAll();
             };
