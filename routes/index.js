@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var picture = mongoose.model('Picture');
+var Picture = mongoose.model('Picture');
 
 router.param('picture', function (req, res, next, id) {
   var query = picture.findById(id);
