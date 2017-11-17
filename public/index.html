@@ -3,8 +3,11 @@
 <head>
     <title>Pictures</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./stylesheets/style.css" rel="stylesheet">
+    
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
     <script src="javascripts/app.js"></script>
+
 
 </head>
 
@@ -16,14 +19,12 @@
             </div>
 
             <form ng-submit="addPicture()" style="margin-top: 30px">
-                <input type="text" ng-model="formContent"></input>
+                <input placeholder="Image URL" type="text" ng-model="formContent">
                 <button type="submit">Add Picture</button>
             </form>
-            <div>
-                {{test}}
-            </div>
-            <div ng-repeat="picture in pictures">
-                <img src="picture.url" />
+            <div class="picture" ng-repeat="picture in pictures">
+                <div ng-click="delete(picture)" class="picture-delete-button">X</div>
+                <img class="picture-image" src={{picture.url}}>
             </div>
         </div>
     </div>
