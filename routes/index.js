@@ -1,58 +1,53 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
+var mongoose = require('mongoose');
+var Comment = mongoose.model('Comment');
 
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://ec2-54-193-37-21.us-west-1.compute.amazonaws.com/commentDB', {
-    useMongoClient: true
+router.param('comment', function (req, res, next, id) {
+  var query = Comment.findById(id);
+  query.exec(function (err, comment) {
+    if (err) { return next(err); }
+    if (!comment) { return next(new Error("can't find comment")); }
+    req.comment = comment;
+    return next();
+  });
 });
 
-const commentSchema = mongoose.Schema({
-    Name: String,
-    Comment: String
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  res.render('index', { title: 'Express' });
 });
 
-const Comment = mongoose.model('Comment', commentSchema);
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    console.log('Connected');
+router.get('/comments', function (req, res, next) {
+  Comment.find(function (err, comments) {
+    if (err) { return next(err); }
+    res.json(comments);
+  });
 });
 
-router.get('/', (request, response, next) => {
-    response.render('index', { title: 'Express' });
+router.get('/comments/:comment', function (req, res) {
+  res.json(req.comment);
 });
 
-router.get('/comment', (request, response, next) => {
-    console.log('In the GET route');
-    Comment.find((error, commentList) => {
-        if (error) {
-            return console.error(error);
-        } else {
-            response.json(commentList);
-        }
-    });
+router.post('/comments', function (req, res, next) {
+  var comment = new Comment(req.body);
+  comment.save(function (err, comment) {
+    if (err) { return next(err); }
+    res.json(comment);
+  });
 });
 
-router.post('/comment', (request, response, next) => {
-    let newcomment = new Comment(request.body);
-    console.log(newcomment);
-    newcomment.save((error, post) => {
-        if (error) {
-            return console.error(error);
-        }
-        response.sendStatus(200);
-    });
+router.put('/comments/:comment/upvote', function (req, res, next) {
+  req.comment.upvote(function (err, comment) {
+    if (err) { return next(err); }
+    res.json(comment);
+  });
 });
 
-router.delete('/comment', (request, response, next) => {
-    db.getCollection("commentDB").remove((error, post) => {
-        if (error) {
-            return console.error(error);
-        }
-        response.sendStatus(200);
-    });
+router.delete('/comments/:comment', function (req, res) {
+  console.log("in Delete");
+  req.comment.remove();
+  res.sendStatus(200);
 });
 
 module.exports = router;
