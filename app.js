@@ -1,7 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://ec2-54-193-37-21.us-west-1.compute.amazonaws.com/commentDB', {userNomgoClient:true});
-require('./models/Comments');
+mongoose.connect('mongodb://ec2-54-193-37-21.us-west-1.compute.amazonaws.com/pictureDB', {userNomgoClient:true});
+require('./models/Pictures');
 
 var path = require('path');
 var favicon = require('serve-favicon');
