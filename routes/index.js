@@ -31,7 +31,7 @@ router.get('/pictures/:picture', function (req, res) {
 
 router.post('/pictures', function (req, res, next) {
   console.log('hi');
-  var picture = new picture(req.body);
+  var picture = new Picture(req.body);
   picture.save(function (err, picture) {
     if (err) { return next(err); }
     res.json(picture);
